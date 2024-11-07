@@ -32,6 +32,11 @@ while running:
         player_pos.x += 300 * dt
         angle = -90
     
+    #Limit do krawędzi
+    player_pos.x = max(20, min(player_pos.x, screen.get_width()-20))
+    player_pos.y = max(20, min(player_pos.y, screen.get_height()-20))
+
+    #Obracanie gracza
     player_image = pygame.transform.rotate(original_image, angle)
     player_rect = player_image.get_rect(center=player_pos)
 
