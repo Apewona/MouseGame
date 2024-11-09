@@ -24,7 +24,7 @@ class Obstacle:
     def draw(self, screen):
         # Draw each line in the obstacle list
         for line in self.lines:
-            pygame.draw.line(screen, (0, 0, 0), line[0], line[1], 5)  # Black color, thickness 5
+            pygame.draw.line(screen, (0, 0, 0), line[0], line[1], 20)  # Black color, thickness 5
 
     def check_collision(self, mouse_rect, extension=0):
         # Expand the rectangle to account for the extension
@@ -84,7 +84,7 @@ class Mouse:
             # Sprawdzamy kolizję z przeszkodami
             mouse_rect = self.get_rect()
             if obstacles.check_collision(mouse_rect, extension=30):
-                self.angle += 5  # Obrót w kierunku omijania przeszkody
+                self.angle += 1  # Obrót w kierunku omijania przeszkody
             else:
                 self.is_turning_around = False
 
