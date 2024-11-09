@@ -1,6 +1,6 @@
 import pygame
 import math
-screen = pygame.display.set_mode((1280, 720))
+
 
 
 class Mouseai:
@@ -59,7 +59,7 @@ class Mouseai:
         # Draw mouse on the screen
         self.draw(screen)
 
-    def update(self, dt, target):
+    def update(self, dt, target, screen):
  
             # Obliczamy kierunek do celu (target)
             direction = pygame.Vector2(target[0] - self.position.x, target[1] - self.position.y)

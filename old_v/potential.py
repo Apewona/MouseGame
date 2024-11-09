@@ -3,8 +3,8 @@ import math
 import random
 import heapq
 
-from Mouse_AI import Mouseai
-from cheese import Cheese
+from old_v.Mouse_AI import Mouseai
+from old_v.cheese import Cheese
 
 # pygame setup
 pygame.init()
