@@ -1,16 +1,6 @@
 import pygame
 import math
-import random
-
-# pygame setup
-pygame.init()
 screen = pygame.display.set_mode((1280, 720))
-clock = pygame.time.Clock()
-running = True
-dt = 0
-
-font = pygame.font.SysFont("Arial", 12)
-
 class Mouse:
     def __init__(self, image_path, pos, speed):
         self.image = pygame.image.load(image_path)
@@ -81,80 +71,3 @@ class Mouse:
         rotated_image = pygame.transform.rotate(self.image, self.angle)
         return rotated_image.get_rect(center=self.position)
     
-    
-    # Update the player update method to prevent going through walls
-
-class Cheese:
-    def __init__(self,image_path,pos):
-        self.image = pygame.image.load(image_path)
-        self.position = pygame.Vector2(pos)
-
-    def draw(self,screen):
-        screen.blit(self.image,self.position)
-
-    def get_rect(self):
-        return self.image.get_rect(topleft=self.position)
-    
-    def relocate(self):
-        self.position.x = random.randrange(20, screen.get_width() - 20)
-        self.position.y = random.randrange(20, screen.get_height() - 20)
-
-
-
-
-# Function to display text on screen
-def display_text(text, position):
-    text_surface = font.render(text, True, (255, 255, 255))  # White color
-    screen.blit(text_surface, position)
-
-
-
-# Initialize player (mouse) instance
-player = Mouse('./img_mouse/mouse.png', (screen.get_width() / 2, screen.get_height() / 2), 300)
-
-pos = pygame.Vector2()
-pos.x = random.randrange(screen.get_width()-20)
-pos.y = random.randrange(screen.get_height()-20)
-
-ch = Cheese('./img_mouse/cheese.png',pos)
-
-
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Fill the screen with a background color
-    screen.fill("purple")
-
-    # Update and draw player
-    keys = pygame.key.get_pressed()
-
-    player.update(dt, keys)
-
-
-
-    player.draw(screen)
-    
-
-
-    ch.draw(screen)
-
-    player.player_cheese_dist(ch.position)
-
-    if player.get_rect().colliderect(ch.get_rect()):
-        ch.relocate() 
-        player.hunger_upgrade()
-        player.cheeseclock_reset()
-    
-
-    # Display player position in the top-left corner
-    display_text(player.get_position(), (10, 15))
-    display_text(player.get_hunger(), (10,30))
-    display_text(player.get_lifetime(), (10,45))
-    display_text(player.get_cheesedist(), (10,60))
-    display_text(player.get_cheeseclock(), (10,75))
-    pygame.display.flip()
-    dt = clock.tick(60) / 1000.0
-
-pygame.quit()
